@@ -1,0 +1,11 @@
+{
+    "params":{
+        "localhost":"True",
+        "local_uri":"mysql://root:@localhost/vskublog",
+        "blog_name":"VSK-Blog",
+        "admin_user":"vskub",
+        "admin_password":"admin123",
+        "secret_key":"qwde22315tuhi32"
+
+    }
+}
