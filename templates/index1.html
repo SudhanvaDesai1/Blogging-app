@@ -1,0 +1,78 @@
+{% extends "layout.html" %} 
+{% block body %}
+
+<header class="masthead" style="background-image: url('/static/img/bgbg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1> Computer Science Dept.  Blog </h1>
+                    <span class="subheading">A Blogging site for Students</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="posts">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <!-- <div class="col-md-10 col-lg-8 col-xl-7"> -->
+                {% for post in posts %}
+                    <div class="card border-dark mx-5 my-5" >
+                        <div class="card-header  d-flex justify-content-between align-items-center">
+                            <div>
+                                {{ post.users.username }} 
+                            </div>
+                            <div>
+                                {{ post.likess|length }}
+                                <a href="/like-post/{{post.id}}"> <i class="material-icons ">thumb_up_off_alt</i>
+                                </a>
+                            </div>
+                        </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <h2>{{ post.title }}</h2>
+                                    <h3>{{ post.tagline }}</h3>
+                                    <p>
+                                        {{post.content}} 
+                                    </p>
+                                    
+                                    <div class="collapse" id="comments-{{post.id}}">
+                                        <div class="card">
+                                            <div class="card-body" id="comments-expanded-{{ post.id }}">
+                                                {% for comment in post.comments %}
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                       <div>
+                                                            <a href="/posts/{{comment.users.username}}">{{ comment.users.username }}</a>: {{comment.text}} 
+                                                       </div>
+                                                       <div>
+                                                           <small class="text-muted">{{comment.date_created}}</small>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text">
+                                        {% if post.comments|length > 0 %}
+                                        <a data-bs-toggle="collapse"  href="#comments-{{post.id}}" role="button">
+                                            <small>view {{ post.comments|length }} comments</small>
+                                        </a>    
+                                        {% else %}
+                                        <small class="text-muted">No comments</small>
+                                        {% endif %}
+                                    </p>
+                                    <form action="/create-comment/{{ post.id }}" method="POST" class="input-group mb-3">
+                                        <input type="text" name="text" id="text" class="form-control" placeholder="Comment here" />
+                                        <button type="submit" class="btn btn-primary">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted"> {{ post.date }}</div>
+                    </div>
+                {% endfor %}
+            <!-- </div> -->
+        </div>
+    </div> 
+</div>
+{% endblock %}

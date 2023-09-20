@@ -1,0 +1,61 @@
+{% extends "layout.html" %} {% block body %}
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('/static/img/home-bg2.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Dashboard</h1>
+          <span class="subheading">Add, Edit,or Remove the Posts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+      <!-- Post preview-->
+      <div class="container">
+        <a href="/logout"
+          ><button class="btn btn-outline-info btn-sm">Logout</button></a
+        >
+        <a href="/dashboard"
+          ><button class="btn btn-outline-info btn-sm">PostsList</button></a
+        >
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>SNo.</th> -->
+              <th>Username</th>
+              <th>email</th>
+              <th>Contact no</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <!-- <td>{{user.user_id}}</td> -->
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                <a href="/deleteuser/{{user.id}}"
+                  ><button type="button" class="btn btn-outline-danger btn-sm">
+                    Delete
+                  </button></a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

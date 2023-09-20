@@ -1,44 +1,67 @@
 {% extends "layout.html" %}
 {% block body %}
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
+<header class="masthead" style="background-image: url('/static/img/home-bg2.jpg')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>{{params['blog_name']}} </h1>
+                    <h1> Computer Science Dept.  Blog </h1>
                     <span class="subheading">A Blogging site for Students</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages%}
+{% for category, message in messages%}
+{% if category=='error' %}
+<div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{message}}
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+{% else %}
+<div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{message}}
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endwith %}
 <!-- Main Content-->
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
             {% for post in posts %}
-            <div class="post-preview">
+            <div class="card border-dark">
                 <a href="/post/{{ post.slug }}">
                     <h2 class="post-title">{{ post.title }}</h2>
                     <h3 class="post-subtitle">{{ post.tagline }}</h3>
                     <p>
-                        {{post.content[:40]}} ...
+                        {{post.content}} ...
                     </p>
                     <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on {{ post.date }}
-                </p>
+                        Posted 
+                        on {{ post.date }}
+                    </p>
                 </a>
+                <hr class="my-3" />
+                {% for comment in post.comments %}
+                <p class="my-1"> {{comment.text}} </p>
+                {% endfor %}
+                <hr class="my-3" />
+                <form action="/create-comment/{{ post.id }}" method="POST" class="input-group mb-3">
+                    <input type="text" name="text" id="text" class="form-control" placeholder="Comment here" />
+                    <button type="submit" class="btn btn-primary">Comment</button>
+                </form>
+                <hr class="my-3" />
+                    {% endfor %}
             </div>
             <!-- Divider-->
-            <hr class="my-4" />
-            {% endfor %}
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts
-                    →</a></div>
         </div>
     </div>
 </div>

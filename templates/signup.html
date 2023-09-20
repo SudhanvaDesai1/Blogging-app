@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VSKUB | Admin</title>
+    <link
+      rel="icon"
+      type="image/jpg"
+      href="static/img/University-LOGO-scaled.jpg"
+    />
+    <link
+    rel="icon"
+    type="image/jpg"
+    href="static/img/University-LOGO-scaled.jpg"
+  />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{url_for('static',filename='css/styles.css')}}" rel="stylesheet" />
+    <style>
+      * {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        background-color: teal;
+      }
+      span {
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px;
+      }
+      span img {
+        height: 8rem;
+        border-radius: 10px;
+      }
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+      }
+
+      .container {
+        box-shadow: 30px 45px 55px #525252;
+        border-radius: 25px;
+        background-color: #545454;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+      }
+      header {
+        color: #dddddd;
+        display: flex;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: 800;
+        padding: 10px 0;
+      }
+      .input-fields {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .input {
+        height: 45px;
+        /* width: 85%; */
+        border: none;
+        outline: none;
+        border-radius: 30px;
+        padding: 0 0 0 45px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      ::-webkit-input-placeholder {
+        letter-spacing: 1px;
+        font-size: 16px;
+        color: #dddddd;
+      }
+      .submit {
+        border: none;
+        color: #dddddd;
+        border-radius: 30px;
+        font-size: 20px;
+        height: 45px;
+        width: 100%;
+        font-weight: 500;
+        background: rgb(132, 162, 255);
+      }
+      .submit:hover {
+        border: none;
+        color: #dddddd;
+        border-radius: 30px;
+        font-size: 23px;
+        height: 48px;
+        /* width: 60%; */
+        font-weight: 500;
+        background: rgb(59, 108, 255);
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages%}
+        {% for category, message in messages%}
+          {% if category=='error' %}
+          <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{message}}
+            <button class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% else %}
+          <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{message}}
+            <button class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+  {% endwith %}
+    <div class="box">
+        <div class="container">
+            <div class="top-header">
+                <span
+              ><img src="static/img/University-LOGO-scaled.jpg" alt=""
+            /></span>
+            <header>Sign-up</header>
+        </div>
+        <form method="post" action="">
+
+          <div class="input-fields">
+            <input
+              type="text"
+              name="username"
+              class="input"
+              placeholder="user-name"
+              required
+            />
+          <div class="input-fields">
+            <input
+              type="email"
+              name="email-id"
+              class="input"
+              placeholder="email"
+              required
+            />
+          </div>
+          <div class="input-fields">
+            <input
+              type="password"
+              class="input"
+              name="password1"
+              placeholder="password"
+              required
+            />
+          </div>
+          <div class="input-fields">
+            <input
+              type="password"
+              class="input"
+              name="password2"
+              placeholder="re-type password"
+              required
+            />
+          </div>
+          <div class="input-fields">
+            <input type="submit" class="submit" value="Signup" />
+        </div>
+    </form>
+    <a  style="color: #dddddd;" href="/"> get back to Home</a>
+    <a href="/userlogin">Login</a>
+        </div>
+      </div>
+  </body>
+</html>
